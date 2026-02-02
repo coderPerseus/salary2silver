@@ -1,0 +1,111 @@
+{
+  "Metadata": {
+    "name": "Next × Cloudflare Starter",
+    "title": "Next × Cloudflare Starter — Minimal edge-ready Next.js stack",
+    "description": "Build with the App Router, package with OpenNext, and deploy to Workers without extra glue.",
+    "Blog": {
+      "title": "Blog — Next × Cloudflare Starter",
+      "description": "Updates, notes, and patterns for shipping with Next.js on Cloudflare."
+    },
+    "Data": {
+      "title": "Data — Next × Cloudflare Starter",
+      "description": "Server Actions + React Query data fetching demo."
+    }
+  },
+  "Home": {
+    "nav": {
+      "brand": "NCS",
+      "tagline": "nextjs cloudflare starter",
+      "data": "Data",
+      "blog": "Blog",
+      "theme": "Theme",
+      "light": "Light",
+      "dark": "Dark"
+    },
+    "intro": {
+      "label": "Overview",
+      "title": "Build edge-ready Next.js apps with Cloudflare in minutes.",
+      "subtitle": "NCS pairs the App Router with Cloudflare Workers, OpenNext packaging, and a modern UI stack for teams shipping fast.",
+      "pointsLabel": "Core highlights",
+      "points": {
+        "router": "App Router + Server Actions",
+        "edge": "Cloudflare Workers runtime",
+        "i18n": "Built-in next-intl locales",
+        "design": "Ant Design + Tailwind UI"
+      }
+    },
+    "stack": {
+      "title": "Tech stack",
+      "subtitle": "A curated foundation for performance, UI, and DX on the edge.",
+      "badge": "Powered by",
+      "items": {
+        "next": {
+          "title": "Next.js App Router",
+          "body": "Layouts, streaming, and server actions with modern routing defaults."
+        },
+        "opennext": {
+          "title": "OpenNext + Cloudflare",
+          "body": "Packages the build for Workers and keeps the runtime lean."
+        },
+        "workers": {
+          "title": "Cloudflare Workers",
+          "body": "Edge deployment with fast cold starts and global reach."
+        },
+        "query": {
+          "title": "TanStack Query",
+          "body": "Client-side caching, refetching, and optimistic UX."
+        },
+        "ui": {
+          "title": "Ant Design + Tailwind",
+          "body": "Reliable components with utility-first layout and polish."
+        },
+        "intl": {
+          "title": "next-intl",
+          "body": "Typed translations and locale-aware routing."
+        }
+      }
+    },
+    "footer": {
+      "summary": "© {year} NCS. Built for Cloudflare Workers.",
+      "authorPrefix": "Created by",
+      "authorLabel": "luckySnail"
+    }
+  },
+  "Data": {
+    "eyebrow": "Server Actions + React Query",
+    "title": "Live API data with a cached client",
+    "subtitle": "Server actions fetch from the API while TanStack Query manages caching, refetching, and loading states.",
+    "refresh": "Refresh data",
+    "refreshing": "Refreshing...",
+    "loading": "Fetching posts from the API...",
+    "error": "Unable to load posts right now.",
+    "postLabel": "Post",
+    "backHome": "Back to home"
+  },
+  "Blog": {
+    "eyebrow": "Product notes",
+    "title": "Shipping on the edge",
+    "subtitle": "A small collection of practical posts about Next.js, OpenNext, and Cloudflare Workers.",
+    "footer": "More posts coming soon.",
+    "posts": {
+      "edge": {
+        "tag": "Edge",
+        "title": "Why this starter keeps the edge sharp",
+        "excerpt": "Reduce cold starts, keep deploys simple, and let the App Router do the heavy lifting.",
+        "meta": "3 min read"
+      },
+      "i18n": {
+        "tag": "i18n",
+        "title": "Internationalization without the overhead",
+        "excerpt": "next-intl keeps translations typed and lean while hreflang stays correct by default.",
+        "meta": "4 min read"
+      },
+      "deploy": {
+        "tag": "Deploy",
+        "title": "From dev to Workers in minutes",
+        "excerpt": "OpenNext packaging plus Cloudflare preview gives you confidence before shipping.",
+        "meta": "5 min read"
+      }
+    }
+  }
+}
