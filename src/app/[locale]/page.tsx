@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { constructMetadata } from "@/lib/metadata";
 import type { AppLocale } from "@/i18n/routing";
-import { LocaleSwitcher } from "@/components/LocaleSwitcher";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { SilverCalculatorClient } from "./SilverCalculatorClient";
 
 export async function generateMetadata({
 	params,
@@ -21,13 +20,12 @@ export async function generateMetadata({
 	});
 }
 
-export default function HomePage() {
-	return (
-		<main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
-			<LocaleSwitcher />
-			<div className="absolute left-6 top-6 z-10">
-				<ThemeToggle />
-			</div>
-		</main>
-	);
+export default async function HomePage({
+	params,
+}: {
+	params: Promise<{ locale: AppLocale }>;
+}) {
+	const { locale } = await params;
+
+	return <SilverCalculatorClient locale={locale} />;
 }

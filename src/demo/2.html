@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>大清打工防坑指南</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --paper-color: #f4ecd8;
+            --ink-color: #2b2b2b;
+            --red-seal: #b5382e;
+            --accent: #8b5a2b;
+            --border-deco: #5d4037;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            background-color: #333;
+            /* 深色木纹背景 */
+            background-image: repeating-linear-gradient(45deg, #2b2b2b 0, #2b2b2b 10px, #333 10px, #333 20px);
+            font-family: 'Noto Serif SC', serif;
+            color: var(--ink-color);
+            padding: 20px 15px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding-bottom: 80px; /* 为底部按钮留空 */
+        }
+
+        /* 顶部标题 */
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #f0f0f0;
+        }
+        .page-header h1 {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 2.2rem;
+            text-shadow: 2px 2px 0px #000;
+        }
+        .page-header p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        /* 知识卡片（奏折风格） */
+        .card {
+            background-color: var(--paper-color);
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            overflow: hidden;
+            position: relative;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 0.6s forwards;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+
+        /* 依次延迟动画 */
+        .card:nth-child(2) { animation-delay: 0.1s; }
+        .card:nth-child(3) { animation-delay: 0.2s; }
+        .card:nth-child(4) { animation-delay: 0.3s; }
+
+        .card-header {
+            background-color: var(--ink-color);
+            color: var(--paper-color);
+            padding: 10px 15px;
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .highlight {
+            color: var(--red-seal);
+            font-weight: bold;
+            margin: 0 3px;
+        }
+
+        /* 趣味对比表格 */
+        .vs-table {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            background: rgba(255,255,255,0.3);
+        }
+        .vs-table th, .vs-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        .vs-table th {
+            background: rgba(0,0,0,0.05);
+            font-weight: bold;
+        }
+
+        /* 底部悬浮按钮 */
+        .back-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--red-seal);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            border: 2px solid #fff;
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            cursor: pointer;
+            z-index: 100;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: transform 0.2s;
+        }
+        .back-btn:active { transform: translateX(-50%) scale(0.95); }
+
+        /* 装饰元素 */
+        .stamp-mark {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            width: 80px;
+            height: 80px;
+            border: 3px solid rgba(181, 56, 46, 0.3);
+            border-radius: 50%;
+            color: rgba(181, 56, 46, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.5rem;
+            transform: rotate(-20deg);
+            pointer-events: none;
+        }
+
+        @keyframes slideUp {
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* 小图标 */
+        .icon { font-style: normal; margin-right: 5px; }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header">
+        <h1>大清打工防坑指南</h1>
+        <p>— 阅后即焚，请勿外传 —</p>
+    </div>
+
+    <!-- 卡片1：货币观念 -->
+    <div class="card">
+        <div class="card-header">
+            <span><i class="icon">💰</i> 别被电视剧骗了</span>
+        </div>
+        <div class="card-body">
+            <p>古装剧里大侠吃顿饭随手扔下一锭银子？<br><strong>那是骗人的！</strong></p>
+            <p style="margin-top:10px;">在古代，白银是<span class="highlight">大额钞票</span>，老百姓平时用的是铜钱（文）。</p>
+            <table class="vs-table">
+                <tr>
+                    <th>单位</th>
+                    <th>古代价值</th>
+                    <th>现代理解</th>
+                </tr>
+                <tr>
+                    <td>1 文</td>
+                    <td>一个馒头</td>
+                    <td>1 元硬币</td>
+                </tr>
+                <tr>
+                    <td>1 贯</td>
+                    <td>1000 文</td>
+                    <td>1000 元大钞</td>
+                </tr>
+                <tr>
+                    <td>1 两银</td>
+                    <td>约 0.7-1 贯</td>
+                    <td>约 700-1000 元</td>
+                </tr>
+            </table>
+            <p style="margin-top:10px; font-size:0.9rem; color:#666;">*注：如果你在路边摊扔下一锭银子（比如10两），相当于现在吃碗面扔下一块金条，店主根本找不开。</p>
+            <div class="stamp-mark">常识</div>
+        </div>
+    </div>
+
+    <!-- 卡片2：俸禄 vs 工钱 -->
+    <div class="card">
+        <div class="card-header">
+            <span><i class="icon">📜</i> 俸禄 vs 工钱</span>
+        </div>
+        <div class="card-body">
+            <p>你以为当官的工资很高？其实他们的<strong>底薪（正俸）</strong>低得离谱！</p>
+            <ul style="margin: 10px 0 10px 20px;">
+                <li><strong>正俸 (底薪)：</strong>七品县令一年才45两，仅够温饱。</li>
+                <li><strong>养廉银 (绩效/奖金)：</strong>雍正发明的。为了不让你贪污，给你发高薪。这才是大头，通常是底薪的 <span class="highlight">10-100倍</span>。</li>
+            </ul>
+            <hr style="border:0; border-top:1px dashed #ccc; margin:10px 0;">
+            <p><strong>普通打工人呢？</strong></p>
+            <p>老百姓拿的是<span class="highlight">工钱</span>，按天或按件算。虽然没有养廉银，但胜在自由，不用担心被皇帝砍头。</p>
+            <div class="stamp-mark">职场</div>
+        </div>
+    </div>
+
+    <!-- 卡片3：购买力 -->
+    <div class="card">
+        <div class="card-header">
+            <span><i class="icon">🍚</i> 你的钱能买什么？</span>
+        </div>
+        <div class="card-body">
+            <p>别光看银子数量，要看<strong>大米指数</strong>。</p>
+            <p style="margin-top:10px;">在康乾盛世：</p>
+            <p>⚪ <strong>1 两银子</strong> ≈ 150 斤优质大米。</p>
+            <p>⚪ <strong>1 个月薪 2 两的打工人</strong>，能买 300 斤米。</p>
+            <p style="margin-top:15px; font-weight:bold;">现代换算：</p>
+            <p>如果你月薪 3500 元，按现在米价（约3元/斤）能买 1100+ 斤米。</p>
+            <p style="margin-top:10px; background:#eee; padding:8px; border-radius:4px;">
+                <strong>结论：</strong> 现代工业化让我们吃饱饭变得更容易了！虽然咱们银子少，但咱们饿不死啊！
+            </p>
+            <div class="stamp-mark">民生</div>
+        </div>
+    </div>
+
+</div>
+
+<!-- 返回按钮 -->
+<a href="#" class="back-btn" onclick="history.back()">
+    <span>↩ 返回计算器</span>
+</a>
+
+</body>
+</html>

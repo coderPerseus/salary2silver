@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>赛博俸禄司 - 你的工资在古代算老几？</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --paper-color: #f4ecd8;
+            --ink-color: #2b2b2b;
+            --red-seal: #b5382e;
+            --accent: #8b5a2b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #333;
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23444' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41zM20 18.6l2.83-2.83 1.41 1.41L21.41 20l2.83 2.83-1.41 1.41L20 21.41l-2.83 2.83-1.41-1.41L18.59 20l-2.83-2.83 1.41-1.41L20 18.59z'/%3E%3C/g%3E%3C/svg%3E");
+            font-family: 'Noto Serif SC', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--ink-color);
+            padding: 20px;
+        }
+
+        /* 宣纸主体 */
+        .scroll-container {
+            width: 100%;
+            max-width: 450px;
+            background-color: var(--paper-color);
+            background-image: linear-gradient(90deg, transparent 95%, rgba(0,0,0,0.05) 96%, transparent 97%),
+                              url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.1'/%3E%3C/svg%3E");
+            border-top: 15px solid var(--accent);
+            border-bottom: 15px solid var(--accent);
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            padding: 30px 20px;
+            position: relative;
+            overflow: hidden;
+            animation: unfold 0.8s ease-out;
+        }
+
+        /* 标题部分 */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 2.5rem;
+            color: var(--ink-color);
+            margin-bottom: 10px;
+            letter-spacing: 5px;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* 输入区域 */
+        .input-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .currency-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2rem;
+            background: rgba(255,255,255,0.5);
+            border: 2px solid #ccc;
+            border-radius: 0;
+            font-family: 'Noto Serif SC', serif;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .currency-input:focus {
+            border-color: var(--ink-color);
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .settings-toggle {
+            font-size: 0.8rem;
+            color: #888;
+            text-align: right;
+            margin-top: 5px;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .advanced-settings {
+            display: none;
+            background: rgba(0,0,0,0.05);
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .advanced-settings.show {
+            display: block;
+        }
+
+        /* 按钮 */
+        .calc-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--ink-color);
+            color: var(--paper-color);
+            border: none;
+            font-size: 1.3rem;
+            font-family: 'Ma Shan Zheng', cursive;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 5px;
+            transition: transform 0.1s;
+        }
+
+        .calc-btn:active {
+            transform: scale(0.98);
+        }
+
+        .calc-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255,255,255,0.2);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        /* 结果区域 */
+        .result-area {
+            margin-top: 30px;
+            display: none; /* 初始隐藏 */
+            text-align: center;
+            border-top: 2px dashed rgba(0,0,0,0.1);
+            padding-top: 20px;
+        }
+
+        .result-value {
+            font-size: 1.5rem;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+
+        .result-value span {
+            font-weight: bold;
+            font-size: 1.8rem;
+            color: var(--red-seal);
+            font-family: 'Ma Shan Zheng', cursive;
+        }
+
+        /* 印章样式 */
+        .seal-stamp {
+            width: 140px;
+            height: 140px;
+            border: 4px solid var(--red-seal);
+            color: var(--red-seal);
+            font-family: 'Ma Shan Zheng', cursive;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+            border-radius: 10px;
+            transform: rotate(-15deg) scale(2); /* 初始放大 */
+            opacity: 0;
+            position: relative;
+            background-image: url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='1' height='1' fill='%23b5382e' fill-opacity='0.2'/%3E%3C/svg%3E");
+        }
+
+        .seal-stamp.animate {
+            animation: stamp-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .seal-title {
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--red-seal);
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+        }
+
+        .seal-grade {
+            font-size: 1.2rem;
+        }
+
+        .comment {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #555;
+            background: rgba(181, 56, 46, 0.05);
+            padding: 15px;
+            border-left: 4px solid var(--red-seal);
+            text-align: left;
+        }
+
+        /* 动画定义 */
+        @keyframes unfold {
+            from { height: 0; opacity: 0; transform: scaleY(0.1); }
+            to { height: auto; opacity: 1; transform: scaleY(1); }
+        }
+
+        @keyframes stamp-in {
+            0% { transform: rotate(-15deg) scale(2); opacity: 0; }
+            100% { transform: rotate(-3deg) scale(1); opacity: 0.9; }
+        }
+
+        /* 装饰用云纹 */
+        .cloud-bg {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%23ccc" opacity="0.2"><path d="M50 60 C40 60 35 50 35 40 C35 25 45 20 50 20 C55 20 65 25 65 40 C65 50 60 60 50 60 Z M20 80 C10 80 5 70 5 60 C5 45 15 40 20 40 C25 40 35 45 35 60 C35 70 30 80 20 80 Z" /></svg>');
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="scroll-container">
+    <div class="header">
+        <h1>赛博俸禄司</h1>
+        <div class="subtitle">今日银价：35元/克 (玩梗版)</div>
+    </div>
+
+    <div class="input-group">
+        <label class="input-label" for="salary">输入您的月薪 (人民币)</label>
+        <input type="number" id="salary" class="currency-input" placeholder="例如：5000" inputmode="numeric">
+        
+        <div class="settings-toggle" onclick="toggleSettings()">[ 调整参数 ]</div>
+        <div class="advanced-settings" id="settings">
+            <label>银价 (元/克): <input type="number" id="silver-price" value="35" style="width: 60px;"></label><br>
+            <label>1两 = <input type="number" id="grams-per-tael" value="50" style="width: 50px;"> 克</label>
+        </div>
+    </div>
+
+    <button class="calc-btn" onclick="calculate()">核算俸禄</button>
+
+    <div class="result-area" id="result-area">
+        <p class="result-value">
+            折合月银 <span id="monthly-silver">0</span> 两<br>
+            折合年俸 <span id="yearly-silver">0</span> 两
+        </p>
+
+        <div class="seal-stamp" id="seal">
+            <div class="seal-title" id="rank-title"></div>
+            <div class="seal-grade" id="rank-grade"></div>
+        </div>
+
+        <div class="comment" id="comment-text">
+            <!-- 评价文案 -->
+        </div>
+    </div>
+
+    <div class="cloud-bg"></div>
+</div>
+
+<script>
+    // 数据配置：等级表 (年俸)
+    // 逻辑：如果达到了这个数字，就是这个官/职业
+    const RANK_SYSTEM = [
+        { min: 180, title: "正一品", job: "太师/大学士", desc: "位极人臣，国之栋梁！大人请受小的一拜！" },
+        { min: 155, title: "正二品", job: "总督/尚书", desc: "封疆大吏，也就是现在的省部级大佬。" },
+        { min: 105, title: "正四品", job: "道员/知府", desc: "主政一方，相当于现在的厅局级干部。" },
+        { min: 45,  title: "正七品", job: "知县(县令)", desc: "百里侯，也就是大家常说的七品芝麻官，但好歹是正印官。" },
+        { min: 33,  title: "正九品", job: "主簿/巡检", desc: "虽然是官场底层，但也吃上了皇粮，相当于现在的科员。" },
+        // 以下为“未入流”的打工人体系（工钱）
+        { min: 20,  title: "未入流", job: "衙役/师爷", desc: "在衙门里干活的临时工，虽无官身，但也算体面。" },
+        { min: 12,  title: "市井",   job: "掌柜/账房", desc: "有点手艺或资本的体面人，也就是现在的白领。" },
+        { min: 6,   title: "平民",   job: "店小二/长工", desc: "起早贪黑，勉强温饱。大人，时代变了，咱还是送外卖吧。" },
+        { min: 0,   title: "流民",   job: "乞丐/难民", desc: "这收入...在古代恐怕熬不过这个冬天。建议去施粥棚排队。" }
+    ];
+
+    function toggleSettings() {
+        const el = document.getElementById('settings');
+        el.classList.toggle('show');
+    }
+
+    function calculate() {
+        // 1. 获取输入
+        const salary = parseFloat(document.getElementById('salary').value);
+        const silverPrice = parseFloat(document.getElementById('silver-price').value);
+        const gramsPerTael = parseFloat(document.getElementById('grams-per-tael').value);
+
+        if (isNaN(salary) || salary <= 0) {
+            alert("请大人输入合法的银两数目（工资）！");
+            return;
+        }
+
+        // 2. 核心计算
+        // 步骤：工资 -> 克 -> 两
+        const silverGrams = salary / silverPrice; 
+        const monthlyTaels = silverGrams / gramsPerTael;
+        const yearlyTaels = monthlyTaels * 12;
+
+        // 3. 匹配等级
+        let matchedRank = RANK_SYSTEM[RANK_SYSTEM.length - 1]; // 默认最低
+        for (let i = 0; i < RANK_SYSTEM.length; i++) {
+            if (yearlyTaels >= RANK_SYSTEM[i].min) {
+                matchedRank = RANK_SYSTEM[i];
+                break;
+            }
+        }
+
+        // 4. 渲染UI
+        const resultArea = document.getElementById('result-area');
+        const seal = document.getElementById('seal');
+
+        // 显示区域
+        resultArea.style.display = 'block';
+        
+        // 动效：数字跳动
+        animateValue("monthly-silver", 0, monthlyTaels, 1000);
+        animateValue("yearly-silver", 0, yearlyTaels, 1000);
+
+        // 设置印章内容
+        document.getElementById('rank-title').innerText = matchedRank.title;
+        document.getElementById('rank-grade').innerText = matchedRank.job;
+        document.getElementById('comment-text').innerHTML = `
+            <strong>【评语】</strong> ${matchedRank.desc}<br>
+            <span style="font-size:0.8em; color:#888; margin-top:5px; display:block;">
+            (按年俸 ${matchedRank.min} 两判定)
+            </span>
+        `;
+
+        // 重置并触发印章动画
+        seal.classList.remove('animate');
+        void seal.offsetWidth; // 触发重绘
+        seal.classList.add('animate');
+
+        // 滚动到底部
+        setTimeout(() => {
+            resultArea.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+    }
+
+    // 数字滚动动画函数
+    function animateValue(id, start, end, duration) {
+        const obj = document.getElementById(id);
+        const range = end - start;
+        let current = start;
+        const increment = end > start ? 1 : -1;
+        const stepTime = Math.abs(Math.floor(duration / (range * 10))) || 10; 
+        // 简单的帧动画
+        let startTime = null;
+
+        function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            
+            // 保留2位小数
+            obj.innerHTML = (progress * end).toFixed(2);
+
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        }
+        window.requestAnimationFrame(step);
+    }
+</script>
+
+</body>
+</html>
