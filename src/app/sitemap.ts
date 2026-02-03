@@ -3,7 +3,7 @@ import { routing } from "@/i18n/routing";
 import { generateHreflangUrls } from "@/lib/hreflang";
 import { getUrl } from "@/lib/urls";
 
-const staticRoutes = ["/", "/data", "/blog"];
+const staticRoutes = ["/"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
 	return staticRoutes.flatMap((route) =>

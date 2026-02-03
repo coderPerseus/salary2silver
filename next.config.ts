@@ -10,6 +10,8 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 // Enable calling `getCloudflareContext()` in `next dev`.
 // See https://opennext.js.org/cloudflare/bindings#local-access-to-bindings.
-initOpenNextCloudflareForDev();
+if (process.env.NODE_ENV === "development") {
+	initOpenNextCloudflareForDev();
+}
 
 export default withNextIntl(nextConfig);
