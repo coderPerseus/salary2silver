@@ -39,22 +39,6 @@
 	animation: unfold 0.8s ease-out;
 }
 
-.topTools {
-	position: absolute;
-	top: 14px;
-	left: 14px;
-	right: 14px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 10px;
-	pointer-events: none;
-}
-
-.topTools > * {
-	pointer-events: auto;
-}
-
 .header {
 	text-align: center;
 	margin-bottom: 30px;
@@ -64,8 +48,8 @@
 
 .title {
 	font-family: "Ma Shan Zheng", "STKaiti", "KaiTi", cursive;
-	font-size: 2.5rem;
-	letter-spacing: 5px;
+	font-size: 2.1rem;
+	letter-spacing: 2px;
 	margin-bottom: 10px;
 }
 
@@ -90,6 +74,59 @@
 
 .helpLink:hover {
 	border-bottom-style: solid;
+}
+
+.profilePanel {
+	margin-bottom: 18px;
+	background: rgba(255, 255, 255, 0.35);
+	border: 1px solid rgba(0, 0, 0, 0.08);
+	padding: 12px;
+}
+
+.profileRow {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.profileRow + .profileRow {
+	margin-top: 10px;
+	padding-top: 10px;
+	border-top: 1px dashed rgba(0, 0, 0, 0.15);
+}
+
+.profileLabel {
+	font-weight: 700;
+	font-size: 0.95rem;
+	color: rgba(0, 0, 0, 0.78);
+	white-space: nowrap;
+}
+
+.segmented {
+	display: inline-flex;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	background: rgba(255, 255, 255, 0.4);
+}
+
+.segmentedBtn {
+	border: 0;
+	background: transparent;
+	padding: 8px 10px;
+	font-size: 0.9rem;
+	cursor: pointer;
+	color: rgba(0, 0, 0, 0.85);
+	transition: background 0.15s ease, transform 0.12s ease;
+	white-space: nowrap;
+}
+
+.segmentedBtn:active {
+	transform: scale(0.99);
+}
+
+.active {
+	background: rgba(43, 43, 43, 0.92);
+	color: var(--paper-color);
 }
 
 .inputGroup {
@@ -222,6 +259,12 @@
 	margin-top: 10px;
 	color: #777;
 	font-size: 0.9rem;
+}
+
+.footerLinks {
+	margin-top: 18px;
+	display: flex;
+	justify-content: center;
 }
 
 .sealStamp {

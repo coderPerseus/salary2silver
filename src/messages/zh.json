@@ -1,7 +1,7 @@
 {
   "Metadata": {
-    "name": "Next × Cloudflare 启动模板",
-    "title": "Next × Cloudflare 启动模板 — 极简边缘就绪 Next.js 方案",
-    "description": "使用 App Router 开发，用 OpenNext 打包，无需额外胶水即可部署到 Workers。"
+    "name": "薪资计算器-白银版",
+    "title": "薪资计算器-白银版",
+    "description": "输入月薪，折算白银克数/银两，并匹配古代俸禄或内廷收入等级（玩梗版）。"
   }
 }

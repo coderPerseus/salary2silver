@@ -25,7 +25,7 @@ export default async function HomePage({
 }: {
 	params: Promise<{ locale: AppLocale }>;
 }) {
-	const { locale } = await params;
+	await params;
 
-	return <SilverCalculatorClient locale={locale} />;
+	return <SilverCalculatorClient />;
 }
