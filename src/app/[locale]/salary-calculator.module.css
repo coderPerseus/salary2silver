@@ -242,6 +242,36 @@
 	padding-top: 20px;
 }
 
+.resultHeader {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	margin-bottom: 10px;
+}
+
+.resultHeaderTitle {
+	font-weight: 800;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	font-size: 0.8rem;
+	color: rgba(0, 0, 0, 0.55);
+}
+
+.shareBtn {
+	border: 1px solid rgba(0, 0, 0, 0.22);
+	background: rgba(255, 255, 255, 0.55);
+	color: rgba(0, 0, 0, 0.8);
+	padding: 8px 12px;
+	font-size: 0.9rem;
+	cursor: pointer;
+	transition: transform 0.12s ease, background 0.2s ease;
+}
+
+.shareBtn:active {
+	transform: scale(0.99);
+}
+
 .resultValue {
 	font-size: 1.5rem;
 	margin: 15px 0;
@@ -265,6 +295,361 @@
 	margin-top: 18px;
 	display: flex;
 	justify-content: center;
+}
+
+.modalOverlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.72);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 16px;
+	z-index: 1000;
+}
+
+.modalSheet {
+	width: min(720px, 100%);
+	max-height: 92vh;
+	background: rgba(244, 236, 216, 0.96);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55);
+	backdrop-filter: blur(6px);
+	overflow: hidden;
+}
+
+.modalTop {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 12px 14px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+	background: rgba(255, 255, 255, 0.18);
+}
+
+.modalTitle {
+	font-weight: 900;
+	letter-spacing: 0.08em;
+	color: rgba(0, 0, 0, 0.75);
+}
+
+.modalClose {
+	border: 0;
+	background: transparent;
+	color: rgba(0, 0, 0, 0.7);
+	font-size: 26px;
+	line-height: 1;
+	cursor: pointer;
+	padding: 0 6px;
+}
+
+.modalBody {
+	overflow: auto;
+	max-height: calc(92vh - 52px);
+}
+
+.shareCardWrap {
+	display: flex;
+	justify-content: center;
+}
+
+.shareCard {
+	width: min(680px, 100%);
+	background: var(--paper-color);
+	border-top: 10px solid var(--accent);
+	border-bottom: 10px solid var(--accent);
+	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+	padding: 16px 16px 14px;
+	position: relative;
+	isolation: isolate;
+	background-image:
+		linear-gradient(
+			90deg,
+			transparent 95%,
+			rgba(0, 0, 0, 0.045) 96%,
+			transparent 97%
+		),
+		url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+}
+
+.shareCard > * {
+	position: relative;
+	z-index: 1;
+}
+
+.shareCard::before {
+	content: "";
+	position: absolute;
+	inset: 12px;
+	border: 1px solid rgba(0, 0, 0, 0.08);
+	pointer-events: none;
+	z-index: 0;
+}
+
+.shareCard::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background:
+		radial-gradient(
+			circle at 20% 20%,
+			rgba(181, 56, 46, 0.06) 0%,
+			transparent 55%
+		),
+		radial-gradient(
+			circle at 85% 75%,
+			rgba(139, 90, 43, 0.06) 0%,
+			transparent 55%
+		);
+	pointer-events: none;
+	mix-blend-mode: multiply;
+	z-index: 0;
+}
+
+.shareCardHead {
+	position: relative;
+	padding-right: 120px;
+	padding-bottom: 12px;
+	border-bottom: 1px dashed rgba(0, 0, 0, 0.18);
+}
+
+.shareCardTitle {
+	font-family: "Ma Shan Zheng", "STKaiti", "KaiTi", cursive;
+	font-size: 1.85rem;
+	letter-spacing: 3px;
+	color: rgba(0, 0, 0, 0.92);
+}
+
+.shareCardMeta {
+	margin-top: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px;
+	color: rgba(0, 0, 0, 0.62);
+	font-size: 0.95rem;
+}
+
+.shareCardMetaPill {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 4px 10px;
+	border: 1px solid rgba(0, 0, 0, 0.18);
+	background: rgba(255, 255, 255, 0.45);
+	font-weight: 700;
+}
+
+.shareCardMetaDot {
+	opacity: 0.5;
+}
+
+.shareBadge {
+	position: absolute;
+	right: 14px;
+	top: 22px;
+	width: 96px;
+	height: 96px;
+	border: 2px solid rgba(181, 56, 46, 0.75);
+	color: rgba(181, 56, 46, 0.9);
+	transform: rotate(-7deg);
+	background: rgba(181, 56, 46, 0.04);
+	display: grid;
+	place-items: center;
+}
+
+.shareBadgeInner {
+	width: 86px;
+	height: 86px;
+	border: 1px dashed rgba(181, 56, 46, 0.55);
+	display: grid;
+	place-items: center;
+	text-align: center;
+	padding: 8px 6px;
+	font-family: "Ma Shan Zheng", "STKaiti", "KaiTi", cursive;
+}
+
+.shareBadgeTitle {
+	font-size: 1.2rem;
+	letter-spacing: 2px;
+}
+
+.shareBadgeSub {
+	margin-top: 6px;
+	font-size: 0.92rem;
+	opacity: 0.85;
+}
+
+.shareStats {
+	margin-top: 14px;
+	display: flex;
+	align-items: stretch;
+	gap: 10px;
+}
+
+.shareStat {
+	flex: 1;
+	background: rgba(255, 255, 255, 0.45);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	padding: 12px 12px 10px;
+	position: relative;
+	overflow: hidden;
+}
+
+.shareStat::before {
+	content: "";
+	position: absolute;
+	inset: -30px -40px auto auto;
+	width: 120px;
+	height: 120px;
+	background: radial-gradient(circle, rgba(139, 90, 43, 0.11), transparent 60%);
+	transform: rotate(12deg);
+}
+
+.shareStatLabel {
+	font-size: 0.78rem;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: rgba(0, 0, 0, 0.55);
+}
+
+.shareStatValue {
+	margin-top: 6px;
+	font-size: 1.22rem;
+	font-weight: 900;
+	color: rgba(0, 0, 0, 0.9);
+}
+
+.shareLore {
+	margin-top: 10px;
+	padding: 12px 12px 10px;
+	background: rgba(255, 255, 255, 0.38);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.shareLoreTitle {
+	font-weight: 900;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	font-size: 0.8rem;
+	color: rgba(0, 0, 0, 0.6);
+}
+
+.shareLoreList {
+	margin: 10px 0 0;
+	padding-left: 18px;
+	color: rgba(0, 0, 0, 0.74);
+	font-size: 0.95rem;
+}
+
+.shareLoreList li + li {
+	margin-top: 6px;
+}
+
+.shareQuote {
+	margin-top: 10px;
+	padding: 12px 12px;
+	background: rgba(181, 56, 46, 0.06);
+	border-left: 4px solid rgba(181, 56, 46, 0.7);
+	color: rgba(0, 0, 0, 0.82);
+	font-size: 0.98rem;
+}
+
+.shareQuoteLabel {
+	font-weight: 900;
+	margin-right: 6px;
+}
+
+.shareCardFoot {
+	margin-top: 12px;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	gap: 12px;
+}
+
+.shareParams {
+	font-size: 0.9rem;
+	color: rgba(0, 0, 0, 0.62);
+}
+
+.shareParamsSmall {
+	font-size: 0.82rem;
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.qrFrame {
+	padding: 8px;
+	border: 2px solid rgba(93, 64, 55, 0.55);
+	background: rgba(255, 255, 255, 0.55);
+	position: relative;
+}
+
+.qrFrame::before {
+	content: "";
+	position: absolute;
+	inset: 4px;
+	border: 1px dashed rgba(93, 64, 55, 0.45);
+	pointer-events: none;
+}
+
+.modalActions {
+	margin-top: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.modalPrimaryBtn {
+	border: 0;
+	background: rgba(43, 43, 43, 0.95);
+	color: var(--paper-color);
+	padding: 12px 18px;
+	font-size: 1rem;
+	cursor: pointer;
+	letter-spacing: 0.12em;
+}
+
+.modalPrimaryBtn:disabled {
+	opacity: 0.7;
+	cursor: not-allowed;
+}
+
+.modalSecondaryBtn {
+	border: 1px solid rgba(0, 0, 0, 0.25);
+	background: rgba(255, 255, 255, 0.45);
+	color: rgba(0, 0, 0, 0.75);
+	padding: 12px 14px;
+	cursor: pointer;
+}
+
+.modalSecondaryLink {
+	color: rgba(0, 0, 0, 0.78);
+	text-decoration: underline;
+	font-size: 0.92rem;
+}
+
+@media (max-width: 420px) {
+	.shareStats {
+		flex-direction: column;
+	}
+
+	.qrFrame {
+		transform: scale(0.92);
+		transform-origin: bottom right;
+	}
+}
+
+@media (max-width: 520px) {
+	.shareStats {
+		flex-direction: column;
+	}
 }
 
 .sealStamp {

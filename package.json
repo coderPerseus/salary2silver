@@ -19,6 +19,7 @@
 		"@ant-design/cssinjs": "^2.0.2",
 		"@opennextjs/cloudflare": "^1.15.0",
 		"@tanstack/react-query": "^5.90.17",
+		"@zumer/snapdom": "*",
 		"antd": "^6.2.0",
 		"geist": "^1.5.1",
 		"next": "16.1.4",
